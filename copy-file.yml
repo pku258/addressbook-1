@@ -1,0 +1,21 @@
+---
+- name: Ansible Copy Example Local to Remote
+  hosts: all
+  #  become: yes
+  #  become_method: sudo
+  #  become_user: root
+  #  mode: 0755
+  #  become_method: sudo
+  #  become: yes
+  tasks:
+    - name: copying file with playbook
+      copy:
+        src: /home/user1/playbook/diskspace.sh
+        dest: /tmp/
+        #        become: yes
+        #user: root
+        mode: 0755
+    - name: execute command
+      command: sh /tmp/diskspace.sh >> /tmp/diskspace.log
+      register: diskspace
+    - debug: msg="{{ diskspace.stdout }}"
